@@ -2,11 +2,18 @@ name: Publish in JFrog
 
 on:  
   push:
+      tags:
+      - '*'
 
 jobs:  
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name : check
+        run: echo "${{github.event.ref}}"
   docker_build_release_candidate:
     runs-on: ubuntu-latest
-    if: ${{ contains(github.ref, 'refs/tags/')  }} && ${{ contains(github.event.ref, '-rc')  }}
+    if: ${{ contains(github.event.ref, 'refs/tags/v'
     steps:
       - uses: actions/checkout@v3
       - name: Set variables
@@ -27,7 +34,6 @@ jobs:
         
   docker_build_release:
     runs-on: ubuntu-latest
-    if: ${{ contains(github.ref, 'refs/tags/')  }} && ${{ !contains(github.event.ref, '-rc')  }}
     steps:
       - uses: actions/checkout@v3
       - name: Set variables
