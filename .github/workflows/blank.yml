@@ -1,9 +1,13 @@
-on:
+name: Publish in GitHub Package Registry
+
+on:  
   push:
     tags:
-      - '1.**'
-         
-jobs:
+      - '1.*'
+    tags-ignore:
+      - '2.*'
+
+jobs:  
   build:
     runs-on: ubuntu-latest
     steps:
