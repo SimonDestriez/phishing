@@ -11,6 +11,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: echo "Hello World"
+      - name: Set env
+        run: echo "MODULE=$(echo '${GITHUB_REF#refs/*/}  | sed -nE 's/.*\/(.*)\/(.*)/\1/p')" >> $GITHUB_ENV
       - name: Test
         run: |
-          echo $RELEASE_VERSION
+          echo $MODULE
