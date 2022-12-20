@@ -8,10 +8,9 @@ on:
 jobs:  
   docker_build_release_candidate:
     runs-on: ubuntu-latest
+    if: ${{ contains(github.event.ref, '-rc') }}
     steps:
       - uses: actions/checkout@v3
-      - name: test
-        run: echo "${{ github.event.ref }}"
       - name: Set variables
         id: vars
         run: |
@@ -30,6 +29,7 @@ jobs:
         
   docker_build_release:
     runs-on: ubuntu-latest
+    if: ${{ !contains(github.event.ref, '-rc') }}
     steps:
       - uses: actions/checkout@v3
       - name: Set variables
