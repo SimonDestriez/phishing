@@ -13,7 +13,6 @@ jobs:
         run: echo "${{github.event.ref}}"
   docker_build_release_candidate:
     runs-on: ubuntu-latest
-    if: ${{ contains(github.event.ref, 'refs/tags/v'
     steps:
       - uses: actions/checkout@v3
       - name: Set variables
