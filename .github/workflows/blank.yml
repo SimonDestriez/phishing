@@ -19,7 +19,10 @@ jobs:
         run: |
           echo ${{ steps.vars.outputs.module }} 
           echo ${{ steps.vars.outputs.version }}
-      - name : docker build on enum-worker
-        if : ${{ contains(steps.vars.outputs.module, 'enum-worker') }}
-        run : echo 'ok'
+      - name: docker build on enum-worker
+        if: ${{ contains(steps.vars.outputs.module, 'enum-worker') }}
+        run: echo 'nok'
+      - name: docker build on root-publisher
+        if: ${{ contains(steps.vars.outputs.module, 'test') }}
+        run: echo 'ok'
       
