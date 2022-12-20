@@ -6,7 +6,7 @@ on:
       - 'test/**-rc*'
 
 jobs:  
-  build:
+  docker_build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -19,4 +19,7 @@ jobs:
         run: |
           echo ${{ steps.vars.outputs.module }} 
           echo ${{ steps.vars.outputs.version }}
+      - name : docker build on enum-worker
+        if : ${{ steps.vars.outputs.module }} == 'enum-worker'
+        run : echo 'ok'
       
