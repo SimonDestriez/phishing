@@ -3,7 +3,7 @@ name: Publish in JFrog
 on:  
   push:
       tags:
-      - '*'
+        - '*'
 
 jobs:  
   test:
