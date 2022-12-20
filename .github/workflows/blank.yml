@@ -2,8 +2,8 @@ name: Publish in JFrog
 
 on:  
   push:
-      tags:
-        - '*'
+    tags:
+      - '*'
 
 jobs:  
   test:
