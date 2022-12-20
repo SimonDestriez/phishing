@@ -3,7 +3,7 @@ name: Publish in GitHub Package Registry
 on:  
   push:
     tags:
-      - 'amass-enum-worker/*-rc*'
+      - 'amass-enum-worker/*.*.*-rc.*'
 
 jobs:  
   build:
