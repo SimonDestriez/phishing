@@ -3,7 +3,7 @@ name: Publish in GitHub Package Registry
 on:  
   push:
     tags:
-      - 'test-**-rc*'
+      - '*-rc*'
 
 jobs:  
   build:
