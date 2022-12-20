@@ -6,7 +6,29 @@ on:
       - '**'
 
 jobs:  
-  docker_build:
+  docker_build_release_candidate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: test
+        run: echo "${{ github.event.ref }}"
+      - name: Set variables
+        id: vars
+        run: |
+          echo "module=$(echo ${GITHUB_REF#refs/*/} | cut -d '/' -f 1)" >> $GITHUB_OUTPUT
+          echo "version=$(echo ${GITHUB_REF#refs/*/} | cut -d '/' -f 2)" >> $GITHUB_OUTPUT
+      - name: Check output
+        run: |
+          echo ${{ steps.vars.outputs.module }} 
+          echo ${{ steps.vars.outputs.version }}
+      - name: docker build on enum-worker
+        if: ${{ contains(steps.vars.outputs.module, 'enum-worker') }}
+        run: echo 'nok'
+      - name: docker build on root-publisher
+        if: ${{ contains(steps.vars.outputs.module, 'test') }}
+        run: echo 'ok'
+        
+  docker_build_release:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
