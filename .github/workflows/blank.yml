@@ -38,7 +38,6 @@ jobs:
           namespace: "adeo/gtdp-amass"
           method: jwt
           path: github-actions
-          jwtGithubAudience: https://github.com/adeo
           role: ${{ github.event.repository.name }}
           secrets: | 
             secret/data/github-actions jfrog_user | user ;
