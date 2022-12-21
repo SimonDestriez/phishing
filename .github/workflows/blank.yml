@@ -1,5 +1,9 @@
 name: Publish in GitHub Package Registry
 
+permissions:
+ id-token: write
+ contents: read
+
 on:  
   push:
     tags:
@@ -7,9 +11,6 @@ on:
 
 jobs:  
   docker_build_release_candidate:
-    permissions:
-      id-token: write
-      contents: read
     runs-on: ubuntu-latest
     if: ${{ contains(github.event.ref, '-rc') }}
     steps:
@@ -34,14 +35,14 @@ jobs:
         uses: hashicorp/vault-action@v2.4.0
         with:
           url: https://vault.factory.adeo.cloud
-          namespace: gtdp-amass
+          namespace: "adeo/gtdp-amass"
           method: jwt
-          path: adeo_github_actions
+          path: github-actions
           jwtGithubAudience: https://github.com/adeo
-          role: VAULT_SECRET
-          secrets: | # pragma: allowlist secret
-            secret/data/github-actions jfrog_user ;
-            secret/data/github-action jfrog_password ; 
+          role: ${{ github.event.repository.name }}
+          secrets: | 
+            secret/data/github-actions jfrog_user | user ;
+            secret/data/github-actions jfrog_password | password; 
         
   docker_build_release:
     runs-on: ubuntu-latest
