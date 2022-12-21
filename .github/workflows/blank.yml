@@ -38,7 +38,7 @@ jobs:
           method: jwt
           path: adeo_github_actions
           jwtGithubAudience: https://github.com/adeo
-          role: github-actions
+          role: VAULT_SECRET
           secrets: | # pragma: allowlist secret
             secret/data/github-actions jfrog_user ;
             secret/data/github-action jfrog_password ; 
