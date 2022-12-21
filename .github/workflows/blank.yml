@@ -26,6 +26,19 @@ jobs:
       - name: docker build on root-publisher
         if: ${{ contains(steps.vars.outputs.module, 'test') }}
         run: echo 'ok'
+      - name: Import secrets from Vault
+        id: secrets
+        uses: hashicorp/vault-action@v2.4.0
+        with:
+          url: https://vault.factory.adeo.cloud
+          namespace: adeo/gtdp-amass
+          method: jwt
+          path: adeo_github_actions
+          jwtGithubAudience: https://github.com/adeo
+          role: github-actions
+          secrets: | # pragma: allowlist secret
+            secret/data/github-actions jfrog_user ;
+            secret/data/github-action jfrog_password ; 
         
   docker_build_release:
     runs-on: ubuntu-latest
