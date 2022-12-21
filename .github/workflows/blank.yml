@@ -34,7 +34,7 @@ jobs:
         uses: hashicorp/vault-action@v2.4.0
         with:
           url: https://vault.factory.adeo.cloud
-          namespace: adeo/gtdp-amass
+          namespace: gtdp-amass
           method: jwt
           path: adeo_github_actions
           jwtGithubAudience: https://github.com/adeo
