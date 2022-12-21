@@ -7,6 +7,9 @@ on:
 
 jobs:  
   docker_build_release_candidate:
+    permissions:
+      id-token: write
+      contents: read
     runs-on: ubuntu-latest
     if: ${{ contains(github.event.ref, '-rc') }}
     steps:
